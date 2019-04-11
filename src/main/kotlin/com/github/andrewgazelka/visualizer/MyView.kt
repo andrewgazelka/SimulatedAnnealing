@@ -9,6 +9,7 @@ import javafx.scene.shape.LineTo
 import javafx.scene.shape.MoveTo
 import javafx.scene.shape.Path
 import javafx.scene.shape.PathElement
+import javafx.scene.text.Font
 import tornadofx.*
 import kotlin.math.sqrt
 
@@ -25,13 +26,14 @@ class MyView : View() {
         style {
             backgroundColor += Color.BLACK
         }
-        group {
+        val distance = text("...") {
 
-            val distance = text("Distance: ...") {
-                style {
-                    stroke = Color.WHITE
-                }
+            font = Font.font("Inconsolata",80.0)
+            style {
+                stroke = Color.WHITE
             }
+        }
+        group {
 
             val path = path {
                 strokeWidth = 1.5
@@ -70,7 +72,7 @@ class MyView : View() {
 
                             pointPath.swap(i1, i2)
 
-                            keyvalue(distance.textProperty(), "Distance: %.2f".format(sqrt(pointPath.pathDist2())))
+                            keyvalue(distance.textProperty(), "%.2f".format(sqrt(pointPath.pathDist2())))
 
                             if (i1 == i2 || elements1 == elements2) return@keyframe
 
